@@ -33,15 +33,15 @@ options = Options()
 options.add_argument("--headless")
 
 # Create a Firefox WebDriver instance in headless mode
-bro = webdriver.Firefox(options=options, service_log_path=os.devnull)
+driver = webdriver.Firefox(options=options, service_log_path=os.devnull)
 
 # Open the specified webpage
-bro.get('https://gw.ict.ac.cn/index_1.html')
+driver.get('https://gw.ict.ac.cn/index_1.html')
 
 # Find the username input field, password input field, and login button by their IDs
-username_input = bro.find_element(By.ID, 'username')
-passwd_input   = bro.find_element(By.ID, 'password')
-login_btn      = bro.find_element(By.ID, 'login-account')
+username_input = driver.find_element(By.ID, 'username')
+passwd_input   = driver.find_element(By.ID, 'password')
+login_btn      = driver.find_element(By.ID, 'login-account')
 
 # Clear the username input field and enter the username
 username_input.clear()
@@ -61,12 +61,12 @@ login_btn.click()
 # Wait for 0.2 seconds to ensure the page is fully loaded
 time.sleep(0.2)
 # Print the title of the current page
-print(bro.title)
+print(driver.title)
 
 # Test if login is successful
 try:
     # When the input passwd is wrong, this element will appear
-    content_element = bro.find_element(By.CSS_SELECTOR, "div.component.dialog.confirm.active .content")
+    content_element = driver.find_element(By.CSS_SELECTOR, "div.component.dialog.confirm.active .content")
     header_element = content_element.find_element(By.CSS_SELECTOR, ".header")
     section_element = content_element.find_element(By.CSS_SELECTOR, ".section")
     print(header_element.text + ": " + section_element.text)
@@ -75,4 +75,4 @@ except NoSuchElementException:
     print("Login successful!")
 
 # Close the browser
-bro.close()
+driver.close()
