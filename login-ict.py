@@ -4,6 +4,7 @@ import getpass
 import argparse
 import subprocess
 from selenium import webdriver
+from selenium.webdriver.firefox.service import Service
 from selenium.webdriver.firefox.options import Options
 from selenium.webdriver.common.by import By
 from selenium.common.exceptions import NoSuchElementException
@@ -28,12 +29,11 @@ except subprocess.TimeoutExpired:
 username = args.user   if args.user   is not None else input("Username: ")
 passwd   = args.passwd if args.passwd is not None else getpass.getpass("Password: ")
 
-# Set up Firefox browser options to run in headless mode (i.e., without displaying the browser interface)
+# Create a Firefox WebDriver instance in headless mode
 options = Options()
 options.add_argument("--headless")
-
-# Create a Firefox WebDriver instance in headless mode
-driver = webdriver.Firefox(options=options, service_log_path=os.devnull)
+service = Service(log_path=os.devnull)
+driver = webdriver.Firefox(options=options, service=service)
 
 # Open the specified webpage
 driver.get('https://gw.ict.ac.cn/index_1.html')
