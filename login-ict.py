@@ -1,13 +1,22 @@
 import time
 import os
 import getpass
+import argparse
 from selenium import webdriver
 from selenium.webdriver.firefox.options import Options
 from selenium.webdriver.common.by import By
 
-# Get the username and password from user input
-username = input("Username: ")
-passwd   = getpass.getpass("Password: ")
+# Create argument parser to get the username and password from command line
+parser = argparse.ArgumentParser(description='Login to ICT Gateway')
+parser.add_argument('-u', '--user', type=str,
+                    help='Specify the username. Defaults to an empty string if not provided.')
+parser.add_argument('-p', '--passwd', type=str,
+                    help='Specify the password. Defaults to an empty string if not provided.')
+args = parser.parse_args()
+
+# Get the real username and password
+username = args.user   if args.user   is not None else input("Username: ")
+passwd   = args.passwd if args.passwd is not None else getpass.getpass("Password: ")
 
 # Set up Firefox browser options to run in headless mode (i.e., without displaying the browser interface)
 options = Options()
