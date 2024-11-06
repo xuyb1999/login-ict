@@ -2,10 +2,19 @@ import time
 import os
 import getpass
 import argparse
+import subprocess
 from selenium import webdriver
 from selenium.webdriver.firefox.options import Options
 from selenium.webdriver.common.by import By
 from selenium.common.exceptions import NoSuchElementException
+
+# Check if our host is already online
+try:
+    subprocess.check_output(['ping', '-c', '1', 'www.baidu.com'], timeout=2)
+    print("Our host is already online. Skip login.")
+    exit(0)
+except subprocess.TimeoutExpired:
+    print("Ping timed out. Start to login.")
 
 # Create argument parser to get the username and password from command line
 parser = argparse.ArgumentParser(description='Login to ICT Gateway')
@@ -68,7 +77,6 @@ try:
     print(header_element.text + ": " + section_element.text)
     print("Login failed!")
 except NoSuchElementException:
-    # FIXME: When the host is already online, wrong passwd will not trigger the exception
     print("Login successful!")
 
 # Close the browser
