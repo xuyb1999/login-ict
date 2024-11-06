@@ -11,8 +11,5 @@
 
 ## Usage
 
-Run the script by executing the following command:
-
-```bash
-python login-ict.py
-```
+* Input username and password interactively: `python login-ict.py`
+* Input username or password via command line: `python login-ict.py -u <user> -p <passwd>`
