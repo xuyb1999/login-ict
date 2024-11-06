@@ -8,14 +8,6 @@ from selenium.webdriver.firefox.options import Options
 from selenium.webdriver.common.by import By
 from selenium.common.exceptions import NoSuchElementException
 
-# Check if our host is already online
-try:
-    subprocess.check_output(['ping', '-c', '1', 'www.baidu.com'], timeout=2)
-    print("Our host is already online. Skip login.")
-    exit(0)
-except subprocess.TimeoutExpired:
-    print("Ping timed out. Start to login.")
-
 # Create argument parser to get the username and password from command line
 parser = argparse.ArgumentParser(description='Login to ICT Gateway')
 parser.add_argument('-u', '--user', type=str,
@@ -23,6 +15,14 @@ parser.add_argument('-u', '--user', type=str,
 parser.add_argument('-p', '--passwd', type=str,
                     help='Specify the password. Defaults to an empty string if not provided.')
 args = parser.parse_args()
+
+# Check if our host is already online
+try:
+    subprocess.check_output(['ping', '-c', '1', 'www.baidu.com'], timeout=2)
+    print("Our host is already online. Skip login.")
+    exit(0)
+except subprocess.TimeoutExpired:
+    print("Ping timed out. Start to login.")
 
 # Get the real username and password
 username = args.user   if args.user   is not None else input("Username: ")
