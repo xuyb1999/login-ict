@@ -58,11 +58,6 @@ time.sleep(0.2)
 # Click the login button
 login_btn.click()
 
-# Wait for 0.2 seconds to ensure the login operation is completed
-time.sleep(0.2)
-# Print the cookies of the current page
-print(bro.get_cookies())
-
 # Wait for 0.2 seconds to ensure the page is fully loaded
 time.sleep(0.2)
 # Print the title of the current page
