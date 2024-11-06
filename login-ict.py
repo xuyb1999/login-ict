@@ -5,6 +5,7 @@ import argparse
 from selenium import webdriver
 from selenium.webdriver.firefox.options import Options
 from selenium.webdriver.common.by import By
+from selenium.common.exceptions import NoSuchElementException
 
 # Create argument parser to get the username and password from command line
 parser = argparse.ArgumentParser(description='Login to ICT Gateway')
@@ -57,6 +58,18 @@ print(bro.get_cookies())
 time.sleep(0.2)
 # Print the title of the current page
 print(bro.title)
+
+# Test if login is successful
+try:
+    # When the input passwd is wrong, this element will appear
+    content_element = bro.find_element(By.CSS_SELECTOR, "div.component.dialog.confirm.active .content")
+    header_element = content_element.find_element(By.CSS_SELECTOR, ".header")
+    section_element = content_element.find_element(By.CSS_SELECTOR, ".section")
+    print(header_element.text + ": " + section_element.text)
+    print("Login failed!")
+except NoSuchElementException:
+    # FIXME: When the host is already online, wrong passwd will not trigger the exception
+    print("Login successful!")
 
 # Close the browser
 bro.close()
