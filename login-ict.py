@@ -19,11 +19,12 @@ args = parser.parse_args()
 
 # Check if our host is already online
 try:
+    print("[INFO] Test our host's network status ...")
     subprocess.check_output(['ping', '-c', '1', 'www.baidu.com'], timeout=2)
-    print("Our host is already online. Skip login.")
+    print("[INFO] Our host is already online. Skip login.")
     exit(0)
 except subprocess.TimeoutExpired:
-    print("Ping timed out. Start to login.")
+    print("[INFO] Ping timed out. Start to login.")
 
 # Get the real username and password
 username = args.user   if args.user   is not None else input("Username: ")
@@ -70,9 +71,9 @@ try:
     header_element = content_element.find_element(By.CSS_SELECTOR, ".header")
     section_element = content_element.find_element(By.CSS_SELECTOR, ".section")
     print(header_element.text + ": " + section_element.text)
-    print("Login failed!")
+    print("[ERROR] Login failed!")
 except NoSuchElementException:
-    print("Login successful!")
+    print("[INFO] Login successful!")
 
 # Close the browser
 driver.close()
