@@ -20,7 +20,7 @@ args = parser.parse_args()
 # Check if our host is already online
 try:
     print("[INFO] Test our host's network status ...")
-    subprocess.check_output(['ping', '-c', '1', 'www.baidu.com'], timeout=2)
+    subprocess.check_output(['ping', '-c', '1', 'www.gitee.com'], timeout=2)
     print("[INFO] Our host is already online. Skip login.")
     exit(0)
 except subprocess.TimeoutExpired:

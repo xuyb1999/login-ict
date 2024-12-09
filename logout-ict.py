@@ -10,7 +10,7 @@ from selenium.common.exceptions import NoSuchElementException
 # Check if our host is already offline
 try:
     print("[INFO] Test our host's network status ...")
-    subprocess.check_output(['ping', '-c', '1', 'www.baidu.com'], timeout=2)
+    subprocess.check_output(['ping', '-c', '1', 'www.gitee.com'], timeout=2)
     print("[INFO] Start to logout.")
 except subprocess.TimeoutExpired:
     print("[INFO] Our host is already offline. Skip logout.")
