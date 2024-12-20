@@ -29,6 +29,7 @@ except subprocess.TimeoutExpired:
 # Get the real username and password
 username = args.user   if args.user   is not None else input("Username: ")
 passwd   = args.passwd if args.passwd is not None else getpass.getpass("Password: ")
+print("[INFO] Login starts, please wait ...")
 
 # Create a Firefox WebDriver instance in headless mode
 options = Options()
