@@ -11,7 +11,7 @@ from selenium.common.exceptions import NoSuchElementException
 try:
     print("[INFO] Test our host's network status ...")
     subprocess.check_output(['ping', '-c', '1', 'www.gitee.com'], timeout=2)
-    print("[INFO] Start to logout.")
+    print("[INFO] Start to logout, please wait ...")
 except subprocess.TimeoutExpired:
     print("[INFO] Our host is already offline. Skip logout.")
     exit(0)
